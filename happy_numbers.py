@@ -10,34 +10,36 @@ Those with number 1 are called happy numbers and others are unhappies. :)
 """
 
 
-def main(n):
-  op = []
-  while True:
-    m = [int(i) for i in str(n)]
-    n = 0
-    for i in m:
-      n = n + i**2
-    if n not in op:
-      op.append(n)
+
+def counter(r , s):
+    i = 0
+    while i != r:
+        print(str(s) + " is " + str(happy_checker(s)))
+        s += 1
+        i += 1
+        
+
+def happy_checker(n):
+    nums = set()
+    h = "Happy!"
+    uh = "Unhappy."
+    while n != 1:
+        n = sum(int(i)**2 for i in str(n))
+        if n in nums:
+            return uh
+        nums.add(n)
+    return h
+
+def main():
+    ask = input("specific number or a list?(s/l)")
+    if ask == "s":
+        number = int(input("Enter Number:"))
+        print(happy_checker(number))
+    elif ask == "l":
+        rounds = int(input("how many numbers to check?"))
+        start = int(input("where to start?"))
+        counter(rounds , start)
     else:
-      break
-  return op[-1]
+        print("invalid input(either s for specific and l for list is accpeted)")
 
-
-def loop(number, happies):
-  if main(number) != 1:
-    skip
-  else:
-    happies.append(number)  
-
-
-rounds = int(input("How many happy numbers do you want to find?"))
-number = int(input("From where shoud I start?(ENTER NUMBER)"))
-happies = []
-
-
-while len(happies) < rounds:
-  loop(number,happies)
-  number += 1
-
-print(happies)
+main()
